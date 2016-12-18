@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styles.css">
+	<script src="io.js"></script>
+	<script src="lambda.js"></script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+	<h1>Binary Lambda Calculus</h1>
+	<div>Program:</div>
+	<div>
+		<input id="program">
+	</div>
+	<div>
+		<span>Bits of output (leave blank to read all output):</span>
+		<input type="number" id="maxoutput">
+	</div>
+	<div>
+		<button>Evaluate</button>
+	</div>
+	<div>Output:</div>
+	<div id="output"></div>
+	<h2>What is this?</h2>
+	<p>This is an interpreter for binary lambda calculus as described <a href="https://tromp.github.io/cl/LC.pdf">here</a>.</p>
+	<p>In short, BLC is ordinary untyped lambda calculus in de Bruijn notation, encoded to a binary string using the following rules:</p>
+	<ul>
+		<li>Lambda expressions are represented by \(00\) followed by the body of the expression.</li>
+		<li>Application is represented by \(01\) followed by the function first, and then the argument.</li>
+		<li>Variables are represented by \(1\) repeated \(n+1\) times (where \(n\) is the index of the variable in de Bruijn notation) followed by \(0\).</li>
+	</ul>
+	<p>A BLC program consists of a binary string containing a lambda term in the above encoding, followed by the input string. To evaluate the program, the input string is applied to the lambda term in the form of a list of boolean values, where \(0\) becomes true and \(1\) becomes false. The resulting expression is also a list of boolean values, which is converted back to a binary string which is the output of the program.</p>
+	<h4>Data structures</h4>
+	<p>There are several important data structures to understand. Since every value in lambda calculus is a function, this means lists and boolean values are functions too.</p>
+	<ul>
+		<li>True is represented by \(λx y.x\)</li>
+		<li>False is represented by \(λx y.y\)</li>
+		<li>A list is represented by \(λf.f h t\) where \(h\) is the first value in the list, and \(t\) is the rest of the list. The empty list is nil, which is equivalent to false.</li>
+	</ul>
+	<p>So using the above rules, the binary string \(01\) becomes \(\langle true, \langle false, nil \rangle \rangle\) which is equal to \(λa.a (λb c.b) (λb.b (λc d.d) (λc d.d))\)</p>
+	<p class="footnote">This is currently an experimental project. Feature requests, bug reports, and other improvements can be suggested on this project's GitHub Issues page. Pull requests and collaboration are welcome.</p>
+</body>
+</html>

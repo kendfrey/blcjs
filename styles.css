@@ -1,0 +1,40 @@
+body
+{
+	font-family: sans-serif;
+}
+
+h1
+{
+	text-align: center;
+}
+
+body > div
+{
+	margin: 5px 0;
+}
+
+#program, #output
+{
+	font: 10pt monospace;
+	border: 1px solid black;
+	width: 200ch;
+}
+
+#maxoutput
+{
+	width: 10ch;
+}
+
+#output
+{
+	line-height: 1.25em;
+	min-height: 1.25em;
+	overflow-wrap: break-word;
+}
+
+.footnote
+{
+	font-size: 80%;
+	font-style: italic;
+	margin: 3em 0;
+}
